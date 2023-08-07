@@ -7,7 +7,6 @@
 // for example:
 const phone = 'iPhone 14 Pro Max';
 console.log(phone); 
-// ------------------------------------------------
 // wrong example:
 // const phone;
 // phone = 'iPhone 14 Pro Max';
@@ -24,12 +23,12 @@ const x = null;
 const y = undefined;
 let z;
 
+// Untuk mengetahui tipe data 
 console.log(typeof isMarried);
 
-// Concatenation
+// Concatenation / Rangkaian
 console.log('My name is ' + name + ' and I am ' + age + ' years old.');
-
-// Template String
+// or
 console.log(`My name is ${name} and I am ${age} years old.`);
 // or
 const hello = `My name is ${name} and I am ${age} years old.`;
@@ -37,29 +36,40 @@ console.log(hello);
 
 // String Properties and Methods
 const s = 'Hello World!';
-console.log(s.length);
+console.log(s.length); // menghitung seluruh karakter di dalam single quote
 console.log(s.toUpperCase());
 console.log(s.toLowerCase());
-console.log(s.substring(0,5));
+console.log(s.substring(0,5)); // mengambil karakter dari index 0 sampai sebelum 5
 console.log(s.substring(0,5).toUpperCase());
-console.log(s.split(''));
+console.log(s.split('')); // memisahkan string menjadi substring dengan pemisah berupa '', shg outputnya berupa array
 
-const t = 'technology, computers, it, code';
+const t = 'technology,computers,it,code';
 console.log(t.split(','));
 
 // Arrays - variables that hold multiple values
 const numbers = new Array(1,2,3,4,5);
 console.log(numbers);
+console.log(typeof numbers);
+console.log(Array.isArray(numbers));
+// cara biasnaya:
+// const numberx = [1,2,3,4,5];
+// console.log(numberx);
 
 const fruits = ['Strawberries', 'Apple', 'Jackfruit', 6, true];
+// data pada array dapat berbeda-beda
 console.log(fruits);
 console.log(fruits[0]);
+console.log(Array.isArray(fruits));
 
 // replace the current value at index 3
 fruits[3] = 'Orange';
 console.log(fruits);
 
 fruits[5] = undefined;
+console.log(fruits);
+
+// remove value to the beginning of the array
+fruits.shift();
 console.log(fruits);
 
 // add value to the beginning of the array
@@ -73,25 +83,34 @@ console.log(fruits);
 // remove the last value of the array
 fruits.pop();
 console.log(fruits);
+// output: ['Grape', 'Apple', 'Jackfruit', 'Orange', true, undefined]
 
 fruits.pop();
 console.log(fruits);
+// output: ['Grape', 'Apple', 'Jackfruit', 'Orange', true]
+
 fruits.pop();
 console.log(fruits);
+// output: ['Grape', 'Apple', 'Jackfruit', 'Orange']
+
 // atau 
-let fruit = ['Grape', 'Strawberries', 'Apple', 'Jackfruit', 'Orange', true, undefined];
-// fruit = fruit.filter(item => item !== true && item !== undefined);
+let fruit = ['Grape', 'Apple', 'Jackfruit', 'Orange', true, undefined];
+console.log(fruit);
+
+fruit = fruit.filter(item => item !== true && item !== undefined);
 console.log(fruit);
 
 // check if the value is an array
 console.log(Array.isArray(fruit));
-// data yang terdapat berbagai tipe data pun termasuk array
 
 // get index value
 console.log(fruits.indexOf('Apple'));
 
+const joinedfruits = fruits.join(' - ');
+console.log(joinedfruits);
+
 // Object Literals
-const person ={
+const person = {
     firstName: 'John',
     lastName: 'Doe',
     age: 30,
@@ -110,7 +129,9 @@ console.log(person.address.street);
 
 // destructuring; pull out variables from an object
 const { firstName, lastName, address: { city } } = person;
-console.log(firstName);
+console.log(firstName); 
+console.log(lastName); 
+console.log(city); 
 
 // add properties
 person.email = 'john.doe@gmail.com';
@@ -136,6 +157,7 @@ const todos = [
 ];
 
 console.log(todos);
+console.log(todos.length); // 3
 console.log(todos[1].id);
 console.log(todos[1].text);
 console.log(todos[1].isCompleted);
@@ -157,10 +179,8 @@ while (i < 10) {
 }
 
 for(let i = 0; i < todos.length; i++) {
-    console.log(todos[i].text);
+    console.log(` Todo ${i + 1}: ${todos[i].text}`);
 }
-
-console.log('------------------------------------');
 
 for(let todo of todos) {
     console.log(todo.text);
@@ -171,11 +191,13 @@ for(let todo of todos) {
 todos.forEach(function(todo) {
     console.log(todo.text);
 });
+// outputnya bertipe data undefined
 
 const text = todos.map(function(todo) {
     return todo.text;
 });
 console.log(text);
+// outputnya berbentuk array
 
 const todoCompleted0 = todos.map(function(todo) {
     return todo.isCompleted === true;
@@ -263,14 +285,15 @@ if(f > 5 || g > 10) {
 }
 
 // Ternary Operator
+// condition ? expression1 jika condition true : expression2 jika condition
 const h = 10;
-const color = h > 10 ? 'red' : 'blue'; //? is then, : is else
+const color = h > 10 ? 'red' : 'blue'; // ? is then, : is else
 console.log(color);
 
 // Switch
 const j = 10;
-// const color2 = j > 10 ? 'red' : 'blue';
-const color2 = 'green';
+const color2 = j > 10 ? 'red' : 'blue';
+// const color2 = 'green';
 
 switch(color2) {
     case 'red':
@@ -300,7 +323,7 @@ console.log(addNums2(5, 4));
 // const
 // arrow function with return
 const addNums3 = (num1, num2) => {
-    return num1 + num2;
+    return num1 + num2; 
 }
 console.log(addNums3(5, 4));
 
@@ -324,9 +347,11 @@ function Person(firstName, lastName, dob) { // dob = date of birth
         return this.dob.getFullYear();
     }
     this.getFullName = function() {
-        return '${this.firstName} ${this.lastName}';
+        return `${this.firstName} ${this.lastName}`; // gunakan back
     }
 }
+console.log(Person);
+// komentar yang ada di dalamnya akan dicetak juga
 
 // Prototype
 Person.prototype.getBirthYear = function() {
@@ -334,25 +359,7 @@ Person.prototype.getBirthYear = function() {
 }
 
 Person.prototype.getFullName = function() {
-    return '${this.firstName} ${this.lastName}';
-}
-
-// Class
-class Person {
-    constructor(firstName, lastName, dob) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        // this.dob = dob; //value yang diberikan berformat string
-        this.dob = new Date(dob); //value yang diberikan berformat date
-    }
-
-    getBirthYear() {
-        return this.dob.getFullYear();
-    }
-
-    getFullName() {
-        return '${this.firstName} ${this.lastName}';
-    }
+    return `${this.firstName} ${this.lastName}`;
 }
 
 // Instantiate object
@@ -367,10 +374,11 @@ console.log(person2.dob.getFullYear());
 console.log(person1.getBirthYear());
 console.log(person2.getFullName());
 
+
 // DOM - Document Object Model
 // Single Element Selectors
-console.log(document.getElementById('my-form'));
-console.log(document.querySelector('.container'));
+console.log(document.getElementById('my-form')); // untuk menampilkan elemen
+console.log(document.querySelector('.container')); // . menunjukkan class
 console.log(document.querySelector('h1'));
 
 // Multiple Element Selectors
@@ -383,6 +391,8 @@ items.forEach((item) => console.log(item));
 
 // Manipulating the DOM
 const ul = document.querySelector('.items');
+console.log(ul);
+
 // ul.remove();
 // ul.lastElementChild.remove();
 ul.firstElementChild.textContent = 'Hello';
@@ -390,25 +400,24 @@ ul.children[1].innerText = 'Brad';
 ul.lastElementChild.innerHTML = '<h1>Hello</h1>';
 
 const btn = document.querySelector('.btn');
-btn.style.background = 'red';
+btn.style.background = 'pink';   
 
 // Events
 // Mouse Event
-btn.addEventListener('click', (e) => {
-    e.preventDefault();
-    console.log(e.target.className);
-    document.querySelector('#my-form').style.background = '#ccc';
-    document.querySelector('body').classList.add('bg-dark');
-    document.querySelector('.items').lastElementChild.innerHTML = '<h1>Hello</h1>';
-}
-);
+// btn.addEventListener('click', (e) => { // click can be changed into mouseover, mouseout, mousedown, mouseup, mouseenter, mouseleave, mousemove
+//     e.preventDefault();
+//     console.log(e.target.className);
+//     document.querySelector('#my-form').style.background = '#ccc';
+//     document.querySelector('body').classList.add('bg-dark'); // classList untuk mengambil style dari css
+//     document.querySelector('.items').style.color = '#000';
+//     document.querySelector('.items').lastElementChild.innerHTML = '<h1>Hello</h1>';
+// });
 
 // Keyboard Event
-const nameInput = document.querySelector('#name');
-nameInput.addEventListener('input', (e) => {
-    document.querySelector('.container').append(nameInput.value);
-}
-);
+// const nameInput = document.querySelector('#name'); // # menunjukkan id
+// nameInput.addEventListener('input', (e) => {
+//     document.querySelector('.container').append(nameInput.value);
+// });
 
 // User Form Script
 const myForm = document.querySelector('#my-form');
@@ -429,7 +438,7 @@ function onSubmit(e) {
         setTimeout(() => msg.remove(), 3000);
     } else {
         const li = document.createElement('li');
-        li.appendChild(document.createTextNode('${nameInput2.value} : ${emailInput.value}'));
+        li.appendChild(document.createTextNode(`${nameInput2.value} : ${emailInput.value}`));
 
         userList.appendChild(li);
 
